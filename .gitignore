@@ -1,0 +1,20 @@
+*
+
+
+# But not .cpp
+!*.cpp
+!*.c
+!*.h
+!*.rs
+!*.java
+!*.class
+!*.js
+!*.go
+!*.py
+!*.pdf
+!*.odt
+!/*
+!.gitignore
+!README.md
+!*.txt
+
