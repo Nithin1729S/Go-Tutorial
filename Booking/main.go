@@ -16,8 +16,6 @@ func main(){
 	fmt.Println("Get your tickets here to attend")
 	var bookings[]string
 	for{
-		
-
 		//var username  //cant predict datatpe
 		var firstName string
 		var lastName string
@@ -33,25 +31,33 @@ func main(){
 		fmt.Println("Enter no of tickets needed:")
 		fmt.Scan(&userTickets)
 
-		remainingTickets-=userTickets
-		bookings=append(bookings,firstName+" "+lastName)
-		fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n",firstName,lastName,userTickets,email);
-		fmt.Printf("%v tickets remaining for %v\n",remainingTickets,conferenceName)
+		if userTickets <= remainingTickets{
+			remainingTickets-=userTickets
+			bookings=append(bookings,firstName+" "+lastName)
+			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n",firstName,lastName,userTickets,email);
+			fmt.Printf("%v tickets remaining for %v\n",remainingTickets,conferenceName)
 
-		firstNames:=[]string{}
-		for _,booking := range bookings{
-			var names=strings.Fields(booking)
-			var firstName = names[0]
-			firstNames=append(firstNames, firstName)
+			firstNames:=[]string{}
+			for _,booking := range bookings{
+				var names=strings.Fields(booking)
+				var firstName = names[0]
+				firstNames=append(firstNames, firstName)
+			}
+
+			fmt.Printf("These are our bookings: %v\n",firstNames)
+
+			var noTicketsRemaining bool = remainingTickets == 0
+			if noTicketsRemaining {
+				fmt.Println("SOLD OUT")
+				break
+			}
+		} else{
+			fmt.Printf("We only have %v tickets remaining , so you cant book %v tickets.\n",remainingTickets,userTickets)
+
 		}
 
-		fmt.Printf("These are our bookings: %v\n",firstNames)
-
-		var noTicketsRemaining bool = remainingTickets == 0
-		if noTicketsRemaining {
-			fmt.Println("SOLD OUT")
-			break
-		}
+		
+		
 	}
  
 	
