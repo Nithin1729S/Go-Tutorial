@@ -89,6 +89,8 @@ func getUserInput()(string,string,string,uint){
 
 func bookTickets(userTickets int,firstName string,lastName string,email string){
 	remainingTickets-=userTickets
+	var userData = make(map[string]string)
+
 	bookings=append(bookings,firstName+" "+lastName)
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n",firstName,lastName,userTickets,email);
 	fmt.Printf("%v tickets remaining for %v\n",remainingTickets,conferenceName)
