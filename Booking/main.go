@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"booking-app/helper"
 )
 
 var conferenceName string ="Go Conference"
@@ -18,7 +19,7 @@ func main(){
 		//var username  //cant predict datatpe
 		firstName,lastName,email,userTickets:=getUserInput()
 
-		isValidName,isValidEmail,isValidTicketNumber:=validateUserInput(firstName,lastName,email,int(userTickets))
+		isValidName,isValidEmail,isValidTicketNumber:=helper.ValidateUserInput(firstName,lastName,email,int(userTickets),remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 			bookTickets(int(userTickets),firstName,lastName,email)
@@ -68,12 +69,6 @@ func printFirstName() []string{
 	return firstNames
 }
 
-func validateUserInput(firstName string,lastName string,email string,userTickets int)(bool,bool,bool){
-	isValidName := len(firstName) >=2 && len(lastName)>=2
-	isValidEmail :=strings.Contains(email,"@")
-	isValidTicketNumber :=userTickets>0 && userTickets<=int(remainingTickets)
-	return isValidName,isValidEmail,isValidTicketNumber
-}
 
 func getUserInput()(string,string,string,uint){
 	var firstName string
