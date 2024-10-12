@@ -1,15 +1,22 @@
 package main
 
 import (
-	"fmt"
-	"strings"
 	"booking-app/helper"
+	"fmt"
 )
 
 var conferenceName string ="Go Conference"
 const conferenceTickets int =50  //can predict datatype 
 var remainingTickets int =50;
-var bookings[]string
+var bookings= make([]UserData,0)
+
+
+type UserData struct {
+	firstName string
+	lastName string
+	email string
+	numberOfTickets int
+}
 
 func main(){
 	
@@ -62,8 +69,7 @@ func greetUsers(){
 func printFirstName() []string{
 	firstNames:=[]string{}
 	for _,booking := range bookings{
-		var names=strings.Fields(booking)
-		var firstName = names[0]
+		var firstName = booking.firstName
 		firstNames=append(firstNames, firstName)
 	}
 	return firstNames
@@ -89,9 +95,16 @@ func getUserInput()(string,string,string,uint){
 
 func bookTickets(userTickets int,firstName string,lastName string,email string){
 	remainingTickets-=userTickets
-	var userData = make(map[string]string)
+	var userData = UserData{
+		firstName: firstName,
+		lastName: lastName,
+		email: email,
+		numberOfTickets: userTickets,
+	}
 
-	bookings=append(bookings,firstName+" "+lastName)
+
+	bookings = append(bookings,userData)
+	fmt.Printf("List of bookings is %v\n",bookings)
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n",firstName,lastName,userTickets,email);
 	fmt.Printf("%v tickets remaining for %v\n",remainingTickets,conferenceName)
 }
